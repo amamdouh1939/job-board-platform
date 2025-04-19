@@ -11,9 +11,9 @@ class DataResponse
 
     protected static $meta;
 
-    protected static int $status;
+    protected static int $status = 200;
 
-    protected static string $message;
+    protected static string $message = 'Success';
 
     public static function data($data)
     {

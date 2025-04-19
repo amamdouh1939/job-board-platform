@@ -40,6 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'candidate-api' => [
+            'driver' => 'passport',
+            'provider' => 'candidates',
+        ],
+        'companies-api' => [
+            'driver' => 'passport',
+            'provider' => 'companies',
+        ],
     ],
 
     /*
@@ -64,11 +72,16 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'candidates' => [
+            'driver' => 'eloquent',
+            'model' => \Modules\Candidate\Models\Candidate::class,
+            'resource' => \Modules\Candidate\Transformers\CandidateResource::class,
+        ],
+        'companies' => [
+            'driver' => 'eloquent',
+            'model' => \Modules\Company\Models\Company::class,
+            'resource' => \Modules\Company\Transformers\CompanyResource::class,
+        ],
     ],
 
     /*
