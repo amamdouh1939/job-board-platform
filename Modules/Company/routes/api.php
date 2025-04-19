@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Company\Http\Controllers\API\V1\Auth\RegistrationController;
 use Modules\Company\Http\Controllers\CompanyController;
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('company', CompanyController::class)->names('company');
+Route::name('companies')->prefix('v1/companies')->group(function () {
+    Route::post('register', [RegistrationController::class, 'register'])->name('register');
 });
