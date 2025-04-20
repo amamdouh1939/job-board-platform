@@ -44,7 +44,7 @@ return [
             'driver' => 'passport',
             'provider' => 'candidates',
         ],
-        'companies-api' => [
+        'company-api' => [
             'driver' => 'passport',
             'provider' => 'companies',
         ],
