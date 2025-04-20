@@ -1,5 +1,6 @@
 {
     "Candidate": true,
     "Company": true,
-    "Job": true
+    "Job": true,
+    "Media": true
 }

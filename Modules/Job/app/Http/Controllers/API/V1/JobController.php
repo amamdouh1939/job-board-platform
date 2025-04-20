@@ -5,6 +5,7 @@ namespace Modules\Job\Http\Controllers\API\V1;
 use App\Helpers\DataResponse;
 use App\Http\Controllers\Controller;
 use Modules\Job\Http\Requests\CreateJobRequest;
+use Modules\Job\Http\Requests\JobApplicationRequest;
 use Modules\Job\Http\Requests\ListJobRequest;
 use Modules\Job\Http\Requests\UpdateJobRequest;
 use Modules\Job\Models\Job;
@@ -73,6 +74,15 @@ class JobController extends Controller
         DataResponse::data(null)
             ->status(204)
             ->message('No content')
+            ->create();
+    }
+
+    public function apply(Job $job, JobApplicationRequest $request)
+    {
+        $this->jobService->apply($job, $request->validated());
+        return DataResponse::data(null)
+            ->status(201)
+            ->message('Application submitted successfully')
             ->create();
     }
 }

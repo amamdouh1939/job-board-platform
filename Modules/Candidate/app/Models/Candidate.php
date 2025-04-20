@@ -4,11 +4,13 @@ namespace Modules\Candidate\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Modules\Candidate\Database\Factories\CandidateFactory;
+use Modules\Job\Models\JobApplication;
 
 class Candidate extends Authenticatable
 {
@@ -23,6 +25,11 @@ class Candidate extends Authenticatable
         'password',
         'occupation',
     ];
+
+    public function applications(): HasMany
+    {
+        return $this->hasMany(JobApplication::class);
+    }
 
     public function password(): Attribute
     {

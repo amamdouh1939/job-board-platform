@@ -15,4 +15,6 @@ interface JobRepository
     public function update(Job $job, array $data): Job;
 
     public function delete(Job $job): void;
+
+    public function getNumberOfJobPostsByCompanyId(int $companyId);
 }

@@ -5,7 +5,9 @@ namespace Modules\Job\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Candidate\Models\Candidate;
 use Modules\Company\Models\Company;
 use Modules\Job\Database\Factories\JobFactory;
 use Modules\Job\Models\Scopes\OwnerCompanyScope;
@@ -35,6 +37,16 @@ class Job extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function applications(): HasMany
+    {
+        return $this->hasMany(JobApplication::class);
+    }
+
+    public function applicants()
+    {
+        return $this->hasManyThrough(Candidate::class, JobApplication::class);
     }
 
      protected static function newFactory(): JobFactory

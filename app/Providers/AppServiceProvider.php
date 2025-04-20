@@ -2,8 +2,14 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Hashing\HashManager;
 use Illuminate\Support\ServiceProvider;
+use Modules\Candidate\Models\Candidate;
+use Modules\Company\Models\Company;
+use Modules\Job\Models\Job;
+use Modules\Job\Models\JobApplication;
+use Modules\Media\Models\Media;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +31,13 @@ class AppServiceProvider extends ServiceProvider
         });
 
 
+        Relation::enforceMorphMap([
+            'candidate' => Candidate::class,
+            'company' => Company::class,
+            'job' => Job::class,
+            'media' => Media::class,
+            'job_application' => JobApplication::class,
+        ]);
     }
 
     /**

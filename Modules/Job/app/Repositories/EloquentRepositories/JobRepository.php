@@ -101,4 +101,11 @@ class JobRepository implements JobRepositoryInterface
             ->with('company')
             ->paginate($size, page: $page);
     }
+
+    public function getNumberOfJobPostsByCompanyId(int $companyId): int
+    {
+        return $this->model->query()
+            ->where('company_id', $companyId)
+            ->count();
+    }
 }
