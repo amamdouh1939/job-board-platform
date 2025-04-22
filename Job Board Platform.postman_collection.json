@@ -1,0 +1,710 @@
+{
+	"info": {
+		"_postman_id": "c09b8ad9-80ab-49cf-b82c-4d745d140d70",
+		"name": "Job Board Platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7504598"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Candidates",
+					"item": [
+						{
+							"name": "Registration",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"Candidate\",\n    \"last_name\": \"One\",\n    \"email\": \"candidate1@test.com\",\n    \"password\": \"12345678\",\n    \"password_confirmation\": \"12345678\",\n    \"occupation\": \"Engineer\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/v1/candidates/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"candidates",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"client_id\": 1,\n    \"client_secret\": \"PYVmhLySWg5cBDp3XKR7bXDSAjmO4WlfQuPIW1AB\",\n    \"username\": \"candidate1@test.com\",\n    \"password\": \"12345678\",\n    \"grant_type\": \"password\",\n    \"scope\": \"*\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/v1/auth/token",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"token"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Companies",
+					"item": [
+						{
+							"name": "Registration",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Company One\",\n    \"email\": \"company1@test.com\",\n    \"password\": \"12345678\",\n    \"password_confirmation\": \"12345678\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/v1/companies/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"companies",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"client_id\": 2,\n    \"client_secret\": \"2YPxdFBqefTgKn75V9t4OjvfhMIWLFOoVLusEcwM\",\n    \"username\": \"company1@test.com\",\n    \"password\": \"12345678\",\n    \"grant_type\": \"password\",\n    \"scope\": \"*\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/v1/auth/token",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"token"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Jobs",
+			"item": [
+				{
+					"name": "Candidates",
+					"item": [
+						{
+							"name": "List Jobs",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{candidateToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost/api/v1/jobs?page=1&size=30&keyword=Post&is_remote=1&location=Lake",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"jobs"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "30"
+										},
+										{
+											"key": "keyword",
+											"value": "Post"
+										},
+										{
+											"key": "is_remote",
+											"value": "1"
+										},
+										{
+											"key": "location",
+											"value": "Lake"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show Job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{candidateToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost/api/v1/jobs/7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"jobs",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Apply to Job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{candidateToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "resume",
+											"type": "file",
+											"src": "/home/amamdouh1939/Downloads/Ahmed Mamdouh (Senior Software Engineer).pdf"
+										},
+										{
+											"key": "cover_letter",
+											"type": "file",
+											"src": "/home/amamdouh1939/Downloads/Ahmed Mamdouh (Senior Software Engineer).pdf"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost/api/v1/jobs/7/apply",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"jobs",
+										"7",
+										"apply"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Companies",
+					"item": [
+						{
+							"name": "List Jobs",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{companyToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost/api/v1/jobs?page=1&size=20",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"jobs"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "20"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show Job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{companyToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost/api/v1/jobs/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"jobs",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{companyToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"English Teacher\",\n    \"description\": \"English Teacher for Preschool\",\n    \"location\": \"Maine\",\n    \"salary_range\": \"10000$ - 20000$\",\n    \"is_remote\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/v1/jobs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"jobs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{companyToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"French Teacher\",\n    \"description\": \"French Teacher for Preschool\",\n    \"location\": \"Maine\",\n    \"salary_range\": \"20000$ - 40000$\",\n    \"is_remote\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/v1/jobs/187",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"jobs",
+										"187"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{companyToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost/api/v1/jobs/7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"jobs",
+										"7"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "Candidates",
+					"item": [
+						{
+							"name": "Dashboard",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{candidateToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/v1/candidates/dashboard",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"candidates",
+										"dashboard"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Companies",
+					"item": [
+						{
+							"name": "Dashboard",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{companyToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/v1/companies/dashboard",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"companies",
+										"dashboard"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "companyToken",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiNzRjZDExZTM3M2MxOTYyMWQ2ZmM0NjJjMzg2MWYwNTFhMTY1YjE1MjFlNTEzNTU3NmNhZTU0NzdiZGViN2ZjYjI2MGRmOWUwYjBmYTViNTgiLCJpYXQiOjE3NDUxMDM1MzYuMjQ4MDM3LCJuYmYiOjE3NDUxMDM1MzYuMjQ4MDQyLCJleHAiOjE3NDYzOTk1MzYuMjI3NTM2LCJzdWIiOiIyMSIsInNjb3BlcyI6WyIqIl19.UHMHUw7NIB1EYfooGqihytK_S13KkGe9pTRDbUB4o_d-XtDpnF3x5tqKjWgfJcV7RBuW9YiS5QvzN132RfK0xoLOce6GmBjGV1CxVDdX3ngj6UdstqeAbotaPD_SknmKHYFdGbfEuIe0aIeUfABVnhEB_jjWsQGDQfLdEFvYVXJehBlFrAEJI1-SAXcY16uqVG33qDtCmgpiLejJaASppCLawJ6kR6YaL1cB_OA2qQMJP-COqe6gNVPjlDQs_Ve3PIiAr9-Vtj00Jk-o5DR0b0qlimlt6VTykX6luQVzmm8AKIQxpwBdmEK-2HoL0AA-S54a6yRI73UVj-3646LIFNHTShGjoTJWXdKPtiFkqU8jLavv-BsAd1e_FzY1kaxAo81T6p6Vlc0TWJgS18o8otYrzfJY79DBAWrVIxVxLIHKhHos6DG0EDc0Y-wLwKZe0V4x88p-1ylY6VGTYR-FNGnQlCu3PEa4-QbUpcKmFAPxX7EvPtKs3DsWakpAfM2eDMT5hMXE82zOutfSiEGAjaY8CnTvwNNej5JmObPse-cik_F28iFBNBNqjQSFHri-7kDm4uAqQUJQOGdj3gvAwP1k1EUGXAq5ag9Dsh0FFAwkRfSwirPH6ZutnTWxO77RgJ7dzQ7oNNLVXuDQZSNStuFp7u5N6lDQsdbwoswGKWY",
+			"type": "string"
+		},
+		{
+			"key": "candidateToken",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTNhYjc3YTU4Yjg0YTQ3ZjBiN2MwZDMyOWNhNmFiZDNiZjc1ODdlYTBhYjhjZTIzZDBkYjJlYjU2YzgzYzc4MDQ4MDI2OGJlMDdkZjQ5MjciLCJpYXQiOjE3NDUxMDM1NzIuNzAzOTM5LCJuYmYiOjE3NDUxMDM1NzIuNzAzOTQyLCJleHAiOjE3NDYzOTk1NzIuNjc5NDA1LCJzdWIiOiIyMSIsInNjb3BlcyI6WyIqIl19.LLDC6KB4vsLOcaLW3841lro5Z-jUcczyS2vlbVAfwZrviRMNtb9oz7gV-BDOozA_G0bqwbMhj9MfeTQanZwRdHrrzPBcMVgimp9i_F8luw3JEprfFmvl9VrMgpnaix4oOMlovcVCsY0MF65sceRDPL5Al2drDTQzJ5GZBThe1dzh0Ykh7wtnCSeFmIqAQRkuf8WlrzGmAFqoJcK7MTmYjN4-4iFA4YxHVxO3tyx2YIPs5tV2_OS_1HHflT5i1wRuMw3SJt4fM_fwrB7Xajc6jL_YaWLu9b6YA6qezt5pmo4CzzsiuQIVMdFj4I8YPJn98jguG9qtFWlpLxJMlTjFT-oBGoKlw_Hi6ljgABkhu77Zj0VYrN2Ro5BK89cAsOMX4sUXYwZkJIiPNb8EF-KvKTz6ZoLf5iTOifvmQdlak4x_fLOOvLZwgb04sK-UQYPDtZZtCEYxJzLsE_KdGJZm7IomGCoKRj7VFI4KTxFUQQxjboAV8M5eHUL2KU03QhZa6ED4gAFR4WXgmfmtMRvmvTPPO5wr6ESDuKBlM7hruYT9QbXvaBG6phcLUw4Jc5Ejakijj3NXgnS8wpY4FzvohNJnbpTMdYvlI8e8iwml5ZFZ5a3RKn33gsfV5WRb-ONYJ8gSaZR6bPMK312N6pIkeZ3DD1u4iup-7UuWGpyWrhs",
+			"type": "string"
+		}
+	]
+}
